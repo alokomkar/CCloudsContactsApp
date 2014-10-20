@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CClouds Contacts</string>
+    <string name="action_settings">Settings</string>
+    <string name="searchHint">Enter Query</string>
+    <string name="clear">C</string>
+
+    <!--
+         Used for the AlphabetIndexer in ContactListFragment to provide quick navigation by
+         alphabet using ListView fast scroll.
+    -->
+    <string name="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+</resources>

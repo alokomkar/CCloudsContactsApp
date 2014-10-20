@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/nameLblTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/profileImageView"
+        android:text="Name : " />
+
+    <TextView
+        android:id="@+id/contactNumberLbTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nameLblTextView"
+        android:layout_below="@+id/nameLblTextView"
+        android:text="PhNo : " />
+
+    <TextView
+        android:id="@+id/emailLblTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/contactNumberLbTextView"
+        android:layout_below="@+id/contactNumberLbTextView"
+        android:text="Email : " />
+
+    <TextView
+        android:id="@+id/nameValueTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/nameLblTextView"
+        android:ellipsize="end"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/contactNumberValueTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/contactNumberLbTextView"
+        android:layout_alignBottom="@+id/contactNumberLbTextView"
+        android:layout_alignLeft="@+id/nameValueTxtView"
+        android:layout_alignParentRight="true"
+         />
+
+    <TextView
+        android:id="@+id/emailValueTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailLblTextView"
+        android:layout_alignBottom="@+id/emailLblTextView"
+        android:layout_alignLeft="@+id/contactNumberValueTxtView"
+        android:layout_alignRight="@+id/contactNumberValueTxtView"
+         />
+
+</RelativeLayout>
