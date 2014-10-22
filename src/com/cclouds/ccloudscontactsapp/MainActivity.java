@@ -2,6 +2,7 @@ package com.cclouds.ccloudscontactsapp;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 public class MainActivity extends FragmentActivity implements SearchFragment.onSearchListener {
 
@@ -20,10 +21,12 @@ public class MainActivity extends FragmentActivity implements SearchFragment.onS
 	
 	private ContactListFragment getContactListFragment() {
 		
-		if( mContactsListFragment == null )
-		mContactsListFragment = (ContactListFragment)
-                getSupportFragmentManager().findFragmentById(R.id.contactListFragment);
-   
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if( mContactsListFragment == null ) {
+			mContactsListFragment = (ContactListFragment)
+	                fragmentManager.findFragmentById(R.id.contactListFragment);
+			
+		}
 		return mContactsListFragment;
 	}
 

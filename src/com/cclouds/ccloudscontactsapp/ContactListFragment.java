@@ -2,6 +2,7 @@ package com.cclouds.ccloudscontactsapp;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -39,11 +40,12 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 	public ContactListFragment() {
 
 	}
-
+	ProgressDialog mProgressDialog = null;
 	@Override 
 	public void onCreate( Bundle savedInstaceState ) {
 		super.onCreate( savedInstaceState );
 		mAdapter = new CustomContactArrayAdapter(getActivity());
+		mProgressDialog = new ProgressDialog(getActivity());
 	}
 
 	@Override
@@ -61,6 +63,10 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		}
 
 		getLoaderManager().initLoader(LOADER_ID, null, this);
+		mProgressDialog.setTitle("Contacts App");
+		mProgressDialog.setMessage("Fetching Contacts...");
+		mProgressDialog.setCancelable(false);
+		mProgressDialog.show();
 
 	}
 
@@ -143,12 +149,17 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		mContactsItems = contactItems;
 		mAdapter.setData(contactItems);
 		mAdapter.notifyDataSetChanged();
+		if( mProgressDialog.isShowing() ) {
+			mProgressDialog.dismiss();
+		}
 	}
 
 	@Override
 	public void onLoaderReset(Loader<List<ContactsItem>> contactItems) {
 		Log.i(TAG, "+++ onLoadReset() +++");
 		mAdapter.setData(null);
-
+		if( mProgressDialog.isShowing() ) {
+			mProgressDialog.dismiss();
+		}
 	}
 }
