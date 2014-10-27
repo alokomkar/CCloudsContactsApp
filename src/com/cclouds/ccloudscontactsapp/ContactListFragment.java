@@ -129,6 +129,7 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 	}
 
 	private void searchByQuery( String searchQuery ) {
+		
 		Log.d( TAG, "Initializing Search on : " + searchQuery);
 		if( searchQuery.equals("") == false || searchQuery.length() != 0 ) {
 			mAdapter.getFilter().filter(searchQuery.trim());

@@ -20,9 +20,9 @@ public class SearchFragment extends Fragment {
 
 	onSearchListener mOnSearchListener;
 	int mSearchMode = -1;
-	
+
 	public SearchFragment() {
-		
+
 	}
 
 	@Override
@@ -32,6 +32,13 @@ public class SearchFragment extends Fragment {
 		 * Inflate the layout for this fragment
 		 */
 		View view = inflater.inflate(R.layout.search_fragment, container, false);
+
+		initUIComponents( view );
+
+		return view;
+	}
+
+	private void initUIComponents( View view ) {
 
 		Button buttonA = (Button) view.findViewById(R.id.buttonA);
 		Button buttonB = (Button) view.findViewById(R.id.buttonB);
@@ -89,7 +96,7 @@ public class SearchFragment extends Fragment {
 
 		Button clearButton = (Button) view.findViewById(R.id.clearBtn);
 		clearButton.setOnClickListener(mButtonClickListener);
-
+		
 		mQueryEditText = (EditText) view.findViewById(R.id.searchEditText);
 		mQueryEditText.addTextChangedListener(new TextWatcher() {
 
@@ -110,11 +117,10 @@ public class SearchFragment extends Fragment {
 			}
 		});
 
-		return view;
 	}
 
 	protected void search(CharSequence s) {
-		
+
 		mSearchMode = ContactListFragment.SEARCH_QUERY_MODE;
 		mOnSearchListener.queryByString(s.toString());
 
@@ -123,7 +129,7 @@ public class SearchFragment extends Fragment {
 	OnClickListener mButtonClickListener = new OnClickListener() {
 
 		@Override
-		public void onClick(View v) {
+		public void onClick( View v ) {
 
 			if( v.getId() == R.id.clearBtn ) {
 				mQueryEditText.setText("");
@@ -145,14 +151,14 @@ public class SearchFragment extends Fragment {
 		}
 	};
 
-	protected void setSearchActivityTitle(String selectedText) {
+	protected void setSearchActivityTitle( String selectedText ) {
 
 		String titleMessage = "Selected Alphabet : " + selectedText;
 		Log.d(TAG, titleMessage ); 
 		setActivityTitle(titleMessage);
 		mSearchMode = ContactListFragment.SEARCH_ALPHABET_MODE;
 		mOnSearchListener.queryByAlphabet(selectedText);
-		
+
 	}
 
 	private void setActivityTitle( String title ) {
@@ -166,7 +172,7 @@ public class SearchFragment extends Fragment {
 
 	@Override 
 	public void onAttach( Activity activity ) {
-		
+
 		try {
 			super.onAttach(activity);
 			mOnSearchListener = (onSearchListener) activity;
@@ -174,12 +180,12 @@ public class SearchFragment extends Fragment {
 			throw new ClassCastException(activity.toString()
 					+ " must implement onSearchListener");
 		}
-	
+
 	}
 
 	@Override
 	public void onDetach() {
-		
+
 		super.onDetach();
 		mOnSearchListener = null;
 

@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CCloudsContactsApp.iml" filepath="$PROJECT_DIR$/CCloudsContactsApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../CCloudsCustomListView/CCloudsCustomListView.iml" filepath="$PROJECT_DIR$/../CCloudsCustomListView/CCloudsCustomListView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../CCloudsSimpleCRUD/CCloudsSimpleCRUD.iml" filepath="$PROJECT_DIR$/../CCloudsSimpleCRUD/CCloudsSimpleCRUD.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../workspace.iml" filepath="$PROJECT_DIR$/../workspace.iml" />
     </modules>
   </component>
 </project>

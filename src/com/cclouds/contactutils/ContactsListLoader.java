@@ -14,7 +14,6 @@ public class ContactsListLoader extends AsyncTaskLoader<List<ContactsItem>>{
 	Activity mActivity;
 	List<ContactsItem> mContactItems;
 	String TAG = getClass().getSimpleName();
-	//ProgressDialog mProgressDialog = null;
 	
 	public ContactsListLoader(Activity activity) {
 		super(activity.getApplicationContext());
@@ -23,26 +22,14 @@ public class ContactsListLoader extends AsyncTaskLoader<List<ContactsItem>>{
 
 	@Override
 	public List<ContactsItem> loadInBackground() {
-
-		/*mProgressDialog = new ProgressDialog(mActivity);
-		mProgressDialog.setIndeterminate(false);
-		mProgressDialog.setMessage("Fetching Contacts, Please Wait...");
-		mProgressDialog.setCancelable(false);
-		mProgressDialog.show();*/
-	
 		mContactItems = new ContactsLister(mActivity).getContactsFromDB();
 		Collections.sort(mContactItems, ALPHA_COMPARATOR);
 		return mContactItems;
-
 	}
 
 	@Override
 	public void deliverResult(List<ContactsItem> contactItems) {
 		
-		/*if (mProgressDialog.isShowing()) {
-			mProgressDialog.dismiss();
-		}*/
-	
 		if (isReset()) {
 			Log.w(TAG, "+++ Warning! An async query came in while the Loader was reset! +++");
 			if (contactItems != null) {
@@ -90,18 +77,15 @@ public class ContactsListLoader extends AsyncTaskLoader<List<ContactsItem>>{
 	@Override
 	protected void onStopLoading() {
 		Log.i(TAG, "+++ onStopLoading()  +++");
-
 		cancelLoad();
 	}
 
 	@Override
 	protected void onReset() {
 		Log.i(TAG, "+++ onReset()  +++");
-
 		// Ensure the loader is stopped.
 		onStopLoading();
-
-		// At this point we can release the resources associated with 'apps'.
+		// At this point we can release the resources associated with 'ContactItems'.
 		if (mContactItems != null) {
 			mContactItems = null;
 		}

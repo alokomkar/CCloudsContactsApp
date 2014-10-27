@@ -29,7 +29,7 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 	private List<ContactsItem> mContactsItems;
 	private LayoutInflater mInflater;
 	private CustomContactFilter mCustomContactFilter;
-	private HashMap<String, Integer> mapIndex;
+	private HashMap<String, Integer> mMapIndex;
 	private String[] mSections;
 	
 	String TAG = getClass().getSimpleName();
@@ -38,7 +38,7 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 		super(context, R.layout.contact_item);
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mapIndex = new LinkedHashMap<String, Integer>();
+		mMapIndex = new LinkedHashMap<String, Integer>();
 	}
 
 	@Override
@@ -103,10 +103,10 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 		}
 		for( int index = 0; index < mContactsItems.size(); index++ ) {
 			character = mContactsItems.get(index).toString().substring(0, 1).toUpperCase(Locale.US);
-			mapIndex.put(character, index);
+			mMapIndex.put(character, index);
 		}
 		
-		Set<String> sectionLetters = mapIndex.keySet();
+		Set<String> sectionLetters = mMapIndex.keySet();
 		 
         // create a list from the set to sort
         ArrayList<String> sectionList = new ArrayList<String>(sectionLetters);
@@ -178,7 +178,7 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 	@Override
 	public int getPositionForSection(int sectionIndex) {
 		Log.d(TAG, "Position for Selection : "+ sectionIndex );
-		return mapIndex.get(mSections[sectionIndex]);
+		return mMapIndex.get(mSections[sectionIndex]);
 	}
 
 	@Override

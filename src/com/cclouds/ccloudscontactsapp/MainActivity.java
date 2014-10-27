@@ -12,9 +12,7 @@ public class MainActivity extends FragmentActivity implements SearchFragment.onS
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		mContactsListFragment = getContactListFragment();
-		
 	}
 
 	
@@ -29,8 +27,6 @@ public class MainActivity extends FragmentActivity implements SearchFragment.onS
 		}
 		return mContactsListFragment;
 	}
-
-
 
 	/**
 	 * SearchFragment.onSearchListener
