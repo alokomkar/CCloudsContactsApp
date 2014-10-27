@@ -15,12 +15,10 @@ public class MainActivity extends FragmentActivity implements SearchFragment.onS
 		mContactsListFragment = getContactListFragment();
 	}
 
-	
-	
 	private ContactListFragment getContactListFragment() {
 		
-		FragmentManager fragmentManager = getSupportFragmentManager();
 		if( mContactsListFragment == null ) {
+			FragmentManager fragmentManager = getSupportFragmentManager();
 			mContactsListFragment = (ContactListFragment)
 	                fragmentManager.findFragmentById(R.id.contactListFragment);
 			
