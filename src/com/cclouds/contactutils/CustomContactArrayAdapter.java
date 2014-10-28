@@ -27,6 +27,7 @@ import com.cclouds.ccloudscontactsapp.R;
 public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implements Filterable, SectionIndexer {
 
 	private List<ContactsItem> mContactsItems;
+	private List<ContactsItem> mOriginalContactsList;
 	private LayoutInflater mInflater;
 	private CustomContactFilter mCustomContactFilter;
 	private HashMap<String, Integer> mMapIndex;
@@ -73,13 +74,13 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 
 	@Override 
 	public ContactsItem getItem( int position ) {
-		return mContactsItems.get(position);
+		return mOriginalContactsList.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		if( mContactsItems != null ) {
-			return mContactsItems.size();
+		if( mOriginalContactsList != null ) {
+			return mOriginalContactsList.size();
 		}
 		return 0;
 	}
@@ -95,14 +96,14 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 		clear();
 		Log.i(TAG, "+++ Initializing Data +++");
 		mContactsItems = contactsItem;
-		mContactsItems = contactsItem;
+		mOriginalContactsList = contactsItem;
 		
 		String character = null;
-		if( mContactsItems == null ) {
+		if( mOriginalContactsList == null ) {
 			return;
 		}
-		for( int index = 0; index < mContactsItems.size(); index++ ) {
-			character = mContactsItems.get(index).toString().substring(0, 1).toUpperCase(Locale.US);
+		for( int index = 0; index < mOriginalContactsList.size(); index++ ) {
+			character = mOriginalContactsList.get(index).toString().substring(0, 1).toUpperCase(Locale.US);
 			mMapIndex.put(character, index);
 		}
 		
@@ -156,6 +157,8 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 				}
 				filterResults.values = FilteredContactsItems;
 				filterResults.count = FilteredContactsItems.size();
+				
+				
 			}
 			return filterResults;
 		}
@@ -164,11 +167,12 @@ public class CustomContactArrayAdapter extends ArrayAdapter<ContactsItem> implem
 		@Override
 		protected void publishResults(CharSequence sequence, FilterResults results) {
 			Log.d(TAG, "PublishResults : " + sequence ); 
+			mOriginalContactsList = (List<ContactsItem>) results.values;
 			if( results.count == 0 ) 
 				notifyDataSetInvalidated();
 			
 			else {
-				mContactsItems = (List<ContactsItem>) results.values;
+				
 				notifyDataSetChanged();
 			}
 		} 

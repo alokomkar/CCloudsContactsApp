@@ -109,10 +109,10 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 	}
 
 	private void resetListViewToDefaultPosition() {
-		
+
 		mAdapter.setData(mContactsItems);
 		getListView().setSelection(0);
-		
+
 	}
 
 	private void scrollToAlphabet(String alphabetFilter) {
@@ -128,13 +128,22 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 
 	}
 
+	String mPrevQuery = null;
 	private void searchByQuery( String searchQuery ) {
-		
+
 		Log.d( TAG, "Initializing Search on : " + searchQuery);
+
+		if( mPrevQuery == null ) 
+			mPrevQuery = searchQuery;
+
 		if( searchQuery.equals("") == false || searchQuery.length() != 0 ) {
-			mAdapter.getFilter().filter(searchQuery.trim());
+
+			if( mPrevQuery.equals(searchQuery) == false ) {
+				mPrevQuery = searchQuery;
+				mAdapter.getFilter().filter(searchQuery.trim());
+			}
 		}
-		
+
 	}
 
 	@Override

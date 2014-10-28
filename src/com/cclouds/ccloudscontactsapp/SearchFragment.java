@@ -112,8 +112,8 @@ public class SearchFragment extends Fragment {
 			}
 
 			@Override
-			public void afterTextChanged(Editable arg0) {
-
+			public void afterTextChanged(Editable s) {
+				//search( s );
 			}
 		});
 
