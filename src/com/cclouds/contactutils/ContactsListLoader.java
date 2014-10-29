@@ -5,24 +5,26 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 public class ContactsListLoader extends AsyncTaskLoader<List<ContactsItem>>{
 
-	Activity mActivity;
+	Context mContext;
 	List<ContactsItem> mContactItems;
 	String TAG = getClass().getSimpleName();
 	
-	public ContactsListLoader(Activity activity) {
-		super(activity.getApplicationContext());
-		this.mActivity = activity;
+	public ContactsListLoader(Context context) {
+		super(context.getApplicationContext());
+		this.mContext = context;
 	}
 
 	@Override
 	public List<ContactsItem> loadInBackground() {
-		mContactItems = new ContactsLister(mActivity).getContactsFromDB();
+		ContentResolver contentResolver = mContext.getContentResolver();
+		mContactItems = new ContactsLister(contentResolver).getContactsFromDB();
 		Collections.sort(mContactItems, ALPHA_COMPARATOR);
 		return mContactItems;
 	}

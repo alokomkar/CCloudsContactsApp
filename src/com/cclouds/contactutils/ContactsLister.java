@@ -3,22 +3,22 @@ package com.cclouds.contactutils;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 
 public class ContactsLister {
 
-	Activity mActivity;
-	public ContactsLister( Activity activity ) {
-		this.mActivity = activity;
+	ContentResolver mContentResolver;
+	public ContactsLister( ContentResolver contentResolver ) {
+		this.mContentResolver = contentResolver;
 	}
 
 	public List<ContactsItem> getContactsFromDB( ) {
 
-		ContentResolver contentResolver = mActivity.getContentResolver();
+		ContentResolver contentResolver = mContentResolver;
 		Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
 				null, null, null, null);
 
@@ -31,7 +31,7 @@ public class ContactsLister {
 
 				contactsItem = new ContactsItem();
 				id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-				photoURL = cursor.getString(cursor.getColumnIndex(Utils.hasHoneycomb() ? Contacts.PHOTO_THUMBNAIL_URI : Contacts._ID));
+				photoURL = cursor.getString(cursor.getColumnIndex( hasHoneycomb() ? Contacts.PHOTO_THUMBNAIL_URI : Contacts._ID));
 				
 				contactsItem.mContactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 				contactsItem.mImageURL = photoURL;
@@ -86,5 +86,13 @@ public class ContactsLister {
 			return ""; 
 		}
 	}
+	
+	/**
+     * Uses static final constants to detect if the device's platform version is Honeycomb or
+     * later.
+     */
+    public static boolean hasHoneycomb() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+    }
 
 }
